@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Boat List{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Boat List</h1>
+    <table class="table-striped table table-hover table-bordered">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for b in boats %}
+            <tr>
+                <td>{{ b.name }}</td>
+                <td class="position-relative">
+                    {{ b.description }}
+                    <div class="col-12 smallTypo toDivBottom">Created By: {{ b.createdBy.name }}</div>
+                </td>
+                <td>
+                    <a href="{{ path('admin.boat.edit', {id:b.id}) }}" class="btn btn-primary inlineBlock">Edit</a>
+                    <form method="post" action="{{ path('admin.boat.delete', {id: b.id}) }}" class="inlineBlock" onsubmit="return confirm('Are you sure? WITH GREAT POWER COMES GREAT RESPONSIBILITY PETER!')">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="_token" value="{{ csrf_token('deleteBoat' ~ b.id) }}">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-right">
+        <a href="{{ path('admin.boat.new') }}" class="btn btn-primary">Add a boat</a>
+    </div>
+</div>
+{% endblock %}

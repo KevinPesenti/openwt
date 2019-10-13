@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Open WT - Boat APP</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset("css/bootstrap/bootstrap.min.css") }}" rel="stylesheet">
+
+    <link href="{{ asset("css/custom.css") }}" rel="stylesheet">
+
+    {% block css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Boat App</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            {% if app.user is not empty %}
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('boat.list') }}">Boat List
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('admin.boat.new') }}">Add a Boat</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.name }}</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ asset("js/jquery/jquery.slim.min.js") }}"></script>
+    <script src="{{ asset("js/bootstrap/bootstrap.bundle.min.js") }}"></script>
+
+    {% block js %}{% endblock %}
+</body>
+</html>

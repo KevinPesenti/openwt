@@ -1,0 +1,10 @@
+.inlineBlock {
+    display: inline-block;
+}
+.smallTypo {
+    font-size: 0.7em;
+}
+.toDivBottom {
+    position: absolute;
+    bottom: 0px;
+}
